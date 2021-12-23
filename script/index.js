@@ -8,38 +8,53 @@ let computePlay = () => {
     return decisionArr[decisionPosition];
 }
 
-let playerPlay = () => {
-
-    return prompt("Rock, Paper, or Scissors");
-}
+let playerPlay = () => prompt("Rock, Paper, or Scissors");
 
 
-let playerSelection = playerPlay();
-let computerSelection = computePlay();
 
-let playRound = (playerSelection, computerSelection) => {
+let playerScore = 0;
+let computerScore = 0;
 
+function playRound(playerSelection, computerSelection){
+    
     let result = null;
     playerSelection = playerSelection.toLowerCase();
     console.log(`You: ${playerSelection} Computer: ${computerSelection}`);
     
-    // readable ? lol
-    result = (playerSelection === computerSelection) ? "tie" :
-        (playerSelection === decisionArr[0] && computerSelection === decisionArr[1]) ?
-        "You Lose! Paper beats Rock" :  
-        (playerSelection === decisionArr[0] && computerSelection === decisionArr[2]) ?
-        "You Win! Rock beats Scissors" :
-        (playerSelection === decisionArr[1] && computerSelection === decisionArr[2]) ?
-        "You Lose! Scissors beats Rock" :
-        (playerSelection === decisionArr[1] && computerSelection === decisionArr[0]) ?
-        "You win! Paper beats Rock" :
-        (playerSelection === decisionArr[2] && computerSelection === decisionArr[0]) ?
-        "You Lose! Rock beats Scissors" :
-        (playerSelection === decisionArr[2] && computerSelection === decisionArr[1]) ?
-        "You Win! Scissors beats Paper" : "Invalid input";
-
+    if(playerSelection === computerSelection){
+        result = "tie";
+    }else if(playerSelection === decisionArr[0] && computerSelection == decisionArr[1]){
+        result = "You Lose! Paper beats Rock";
+    }else if (playerSelection === decisionArr[0] && computerSelection == decisionArr[2]){
+        result = "You Win! Rock beats Scissors";
+    }else if (playerSelection === decisionArr[1] && computerSelection == decisionArr[2]){
+        result = "You Lose! Scissors beats Paper";
+    }else if (playerSelection === decisionArr[1] && computerSelection == decisionArr[0]){
+        result = "You Win! Paper beats Rock";
+    }else if (playerSelection === decisionArr[2] && computerSelection == decisionArr[0]){
+        result = "You Lose! Rock beats Scissors";
+    }else if (playerSelection === decisionArr[2] && computerSelection == decisionArr[1]){
+        result = "You Win! Scissors beats Rock";
+    }else{
+        result = "Invalid input";
+    }
+    
     return result;
-
+    
 }
 
-console.log(playRound(playerSelection, computerSelection));
+function game(){
+
+    let rounds = 5;
+    for(let i = 0; i < rounds; i++){
+    // while(playerScore < 5 || computerScore < 5){
+        let playerSelection = playerPlay();
+        let computerSelection = computePlay();
+        console.log(playRound(playerSelection, computerSelection));
+    }
+}
+
+game();
+
+
+
