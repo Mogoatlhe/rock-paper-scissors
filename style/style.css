@@ -1,0 +1,33 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    /* border: red 1px solid; */
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#rock, #paper, #scissors{
+    background-color: white;
+    background-size: cover;
+    border: none;
+    width: 100px;
+    height: 100px;
+}
+
+#rock{
+    background-image: url("../images/rock.png");
+}
+
+#paper{
+    background-image: url("../images/paper.png");
+}
+
+#scissors{
+    background-image: url("../images/scissors.png");
+}
