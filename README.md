@@ -6,9 +6,9 @@ The rock paper scissors game implemented in JavaScript as part of [The Odin Proj
 
 ## Live Version
 
+https://mogoatlhe.github.io/rock-paper-scissors/
 ![](images/design.png)
 
-https://mogoatlhe.github.io/rock-paper-scissors/
 
 ## Challenges Encountered
 
