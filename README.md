@@ -20,4 +20,4 @@ Nothing challenging yet
 
 ## Crediting Image Providers
 
-I found the black and white icons for the game [here]("https://thenounproject.com/browse/icons/term/rock-paper-scissors/?iconspage=1")
+I found the black and white icons for the game [here](https://thenounproject.com/browse/icons/term/rock-paper-scissors/?iconspage=1)
