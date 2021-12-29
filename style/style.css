@@ -23,11 +23,11 @@ body{
     height: 100vh;
 }
 
-#you-details{
+#you-details, .you{
     color: #ee964b;
 }
 
-#computer-details{
+#computer-details, .computer{
     color: #586ba4
 }
 
@@ -58,12 +58,19 @@ body{
     display: flex;
 }
 
+button{
+    cursor: pointer;
+}
+
 #text-feedback-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100px;
     font-size: 0.6rem;
+    background-color: black;
+    color: white;
+    text-align: center;
 }
 
 #computer-selection{
@@ -98,12 +105,10 @@ body{
     background-image: url("../images/scissors-computer.png");
 }
 
-#text-feedback-container{
-    background-color: black;
-    color: white;
-    text-align: center;
+.remove-background-image{
+    background-image: none;
 }
 
-.hideContent{
-    display: none;
+.reduce-font{
+    font-size: 0.4rem !important;
 }

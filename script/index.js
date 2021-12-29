@@ -11,62 +11,83 @@ let computePlay = () => {
 let score = 0;
 let playerScore = 0;
 let computerScore = 0;
-let playerBtn = null;
-let computerBtn = null;
 
-function resetBtnBackgroundImage(){
+function resetComputerSelection(){
 
-    let selectionBtn = null;
+    let selection = null;
 
-    decisionArr.forEach(selection => {
-        
-        selectionBtn = document.querySelector(`#${selection}`);
-        selectionBtn.style.backgroundImage = `url("./images/${selection}.png")`;
+    decisionArr.forEach(curr => {
+        selection = document.querySelector(`.${curr}`);
+        selection.classList.remove("remove-background-image");
     });
+}
+
+
+function setComputerSelection(computerSelection){
+    
+    decisionArr.forEach(curr => {
+        if(curr === computerSelection){
+            return;
+        }
+        
+        selection = document.querySelector(`.${curr}`);
+        selection.classList.add("remove-background-image");
+        
+    });
+
+}
+
+function determineWinner(playerSelection, computerSelection){
+    if(playerSelection === computerSelection){
+        result = `Tie <br> You: <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+    }else if(playerSelection === decisionArr[0] && computerSelection == decisionArr[1]){
+        result = `You Lose <br> You:  <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+        computerScore++;
+    }else if (playerSelection === decisionArr[0] && computerSelection == decisionArr[2]){
+        result = `You Win <br> You:  <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+        playerScore++;
+    }else if (playerSelection === decisionArr[1] && computerSelection == decisionArr[2]){
+        result = `You Lose <br> You:  <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+        computerScore++;
+    }else if (playerSelection === decisionArr[1] && computerSelection == decisionArr[0]){
+        result = `You Win <br> You:  <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+        playerScore++;
+    }else if (playerSelection === decisionArr[2] && computerSelection == decisionArr[0]){
+        result = `You Lose <br> You:  <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+        computerScore++;
+    }else if (playerSelection === decisionArr[2] && computerSelection == decisionArr[1]){
+        result = `You Win <br> You:  <span class = "you">${playerSelection}</span>`;
+        result += ` - Computer: <span class = "computer">${computerSelection}</span>`;
+        playerScore++;
+    }else{
+        result = "Invalid input";
+    }
+
+    return result;
 }
 
 function playRound(playerSelection, computerSelection){
     
-    resetBtnBackgroundImage();
+    resetComputerSelection();
+    setComputerSelection(computerSelection);
 
     let result = null;
     let overallWinner = null;
     playerSelection = playerSelection.toLowerCase();
-    
-    playerBtn = document.querySelector(`#${playerSelection}`);
-    computerBtn = document.querySelector(`#${computerSelection}`);
 
-    if(playerSelection !== computerSelection){
-        playerBtn.style.backgroundImage = `url("./images/${playerSelection}-you.png")`;
-        computerBtn.style.backgroundImage = `url("./images/${computerSelection}-computer.png")`;
+    if(playerScore > 4 || computerScore > 4){
+        playerScore = computerScore = 0;
+        document.querySelector("#text-feedback-container").classList.remove("reduce-font");
     }
 
-    if(playerSelection === computerSelection){
-        result = `Tie: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${playerScore} - ${ computerScore } :Computer`;
-        
-        playerBtn.style.backgroundImage = `url("./images/${playerSelection}.png")`;
-    }else if(playerSelection === decisionArr[0] && computerSelection == decisionArr[1]){
-        result = `You Lose: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${playerScore} - ${ ++computerScore } :Computer`;
-    }else if (playerSelection === decisionArr[0] && computerSelection == decisionArr[2]){
-        result = `You Win: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${ ++playerScore } - ${ computerScore } :Computer`;
-    }else if (playerSelection === decisionArr[1] && computerSelection == decisionArr[2]){
-        result = `You Lose: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${playerScore} - ${ ++computerScore } :Computer`;
-    }else if (playerSelection === decisionArr[1] && computerSelection == decisionArr[0]){
-        result = `You Win: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${ ++playerScore } - ${ computerScore } :Computer`;
-    }else if (playerSelection === decisionArr[2] && computerSelection == decisionArr[0]){
-        result = `You Lose: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${playerScore} - ${ ++computerScore } :Computer`;
-    }else if (playerSelection === decisionArr[2] && computerSelection == decisionArr[1]){
-        result = `You Win: You - ${playerSelection} : Computer - ${computerSelection} <br>
-        You: ${ ++playerScore } - ${ computerScore } :Computer`;
-    }else{
-        result = "Invalid input";
-    }
+    result = determineWinner(playerSelection, computerSelection);
+    result = `<span class = "text-feedback">${result}</span>`;
 
     if(playerScore > 4 || computerScore > 4){
         if(playerScore > 4){
@@ -75,21 +96,24 @@ function playRound(playerSelection, computerSelection){
             overallWinner = `Computer wins the Tournament`
         }
 
-        result += `<br> ${overallWinner}`;
+        result += `<span class = "text-feedback"> ${overallWinner}<span>`;
+        document.querySelector("#text-feedback-container").classList.add("reduce-font");
     }
+
+    document.querySelector("#you-score").textContent = playerScore;
+    document.querySelector("#computer-score").textContent = computerScore;
     
     return result;
     
 }
 
 let buttons = document.querySelectorAll("button");
-
 buttons.forEach(button => {
 
     button.addEventListener("click", function(){
 
         let computerSelection = computePlay();
-        let score = document.querySelector("#score");
+        let score = document.querySelector("#text-feedback-container");
         let result = playRound(this.getAttribute("id"), computerSelection);
 
         score.innerHTML = result;
