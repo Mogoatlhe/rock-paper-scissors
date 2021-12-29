@@ -3,11 +3,11 @@
 html {
     box-sizing: border-box;
     font-family: 'Alfa Slab One', cursive;
+    font-size: 3rem;
 }
 
 *, *::before, *::after {
     box-sizing: inherit;
-    border: red 1px solid;
 }
 
 body{
@@ -16,25 +16,94 @@ body{
 }
 
 #container{
+    /* border: red 1px solid; */
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
 }
 
-#rock, #paper, #scissors{
+#you-details{
+    color: #ee964b;
+}
+
+#computer-details{
+    color: #586ba4
+}
+
+#you-details, #computer-details{
+    display: flex;
+    align-items: center;
+}
+
+#participant-name{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+#rock, #paper, #scissors, #computer-selection div{
     background-color: white;
     background-size: cover;
     border: none;
-    width: 100px;
+    width: 180px;
+    height: 180px;
+}
+
+#selection{
+    display: flex;
+    flex-direction: column;
+}
+
+#my-selection{
+    display: flex;
+}
+
+#text-feedback-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100px;
+    font-size: 0.6rem;
+}
+
+#computer-selection{
+    display: flex;
+}
+
+#computer-selection div{
+    transform: rotate(180deg);
 }
 
 #rock{
-    background-image: url("../images/rock.png");
+    background-image: url("../images/rock-you.png");
 }
 
 #paper{
-    background-image: url("../images/paper.png");
+    background-image: url("../images/paper-you.png");
 }
 
 #scissors{
-    background-image: url("../images/scissors.png");
+    background-image: url("../images/scissors-you.png");
+}
+
+.rock{
+    background-image: url("../images/rock-computer.png");
+}
+
+.paper{
+    background-image: url("../images/paper-computer.png");
+}
+
+.scissors{
+    background-image: url("../images/scissors-computer.png");
+}
+
+#text-feedback-container{
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.hideContent{
+    display: none;
 }
