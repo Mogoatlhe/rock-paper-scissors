@@ -4,12 +4,16 @@ html {
 
 *, *::before, *::after {
     box-sizing: inherit;
-    /* border: red 1px solid; */
+    border: red 1px solid;
 }
 
 body{
     margin: 0;
     padding: 0;
+}
+
+#container{
+    display: flex;
 }
 
 #rock, #paper, #scissors{
